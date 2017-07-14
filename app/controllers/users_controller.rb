@@ -3,14 +3,16 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+  
   def show
-
+    @current_user = current_user
   end
 
    def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Succesfully registrated!"
+      sign_in @user
+      flash.now[:success] = "Succesfully registrated!"
       redirect_to @user
     else
       render 'new'

@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   root "users#new"
+  
+  match '/room',    to: 'users#show',       via: 'get'
+  match '/signin',  to: 'sessions#new',     via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  #match '/change_password',   to: 'app#change',  via: 'get'
 
-    match '/room',              to: 'app#room',   via: 'get'
-    match '/change_password',   to: 'app#change',   via: 'get'
-
-
-  get 'app/change'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

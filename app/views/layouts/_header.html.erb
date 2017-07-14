@@ -4,9 +4,14 @@
         <h1 id = "title">Sample App</h1>
           <nav>
             <ul class="nav navbar-nav pull-right">
-              <li><%= link_to "My Room",    '#' %></li>
-              <li><%= link_to "Change Password",    '#' %></li>
-              <li><%= link_to "Sign in", '#' %></li>
+            <% if signed_in? %>
+                <li><%= link_to @current_user.name ,   room_path %></li>
+                <li><%= link_to "Change Password",    '#' %></li>
+                <li><%= link_to "Sign Out", signout_path,  method: "delete" %></li>
+                
+            <% else %>
+                <li><%= link_to "Sign in", signin_path %></li>                
+            <% end %>    
             </ul>
           </nav>
         </div>
