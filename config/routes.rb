@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "app#registration"
+  resources :users
+
+  root "users#new"
 
     match '/room',              to: 'app#room',   via: 'get'
     match '/change_password',   to: 'app#change',   via: 'get'
