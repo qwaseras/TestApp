@@ -5,10 +5,15 @@
           <nav>
             <ul class="nav navbar-nav pull-right">
             <% if signed_in? %>
-                <li><%= link_to @current_user.name ,   room_path %></li>
+                <li>
+                    <%= link_to @current_user.name ,   room_path %>
+                     <% if current_user.admin? %>
+                    | ADMIN
+                     <% end %>
+                </li>
                 <li><%= link_to "Change Password",    '#' %></li>
                 <li><%= link_to "Sign Out", signout_path,  method: "delete" %></li>
-                
+                <li><%= link_to "Send ticket", ticket_path %></li>                
             <% else %>
                 <li><%= link_to "Sign in", signin_path %></li>                
             <% end %>    

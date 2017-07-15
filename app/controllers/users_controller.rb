@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   
   def show
     @current_user = current_user
+    @list_items = current_user.ticket_list
   end
 
    def create

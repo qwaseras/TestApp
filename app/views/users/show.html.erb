@@ -1,0 +1,15 @@
+ <% if current_user.admin? %>
+ <h2>Tickets</h2>
+ <% @list_items.each_with_index do |t, index|%>
+        <% if t.answer.nil?%>
+            <p><%= index+1 %>. <%= t.content %>.<br/> Admin answer: <%=t.answer%><p>
+            <%= link_to "answer", edit_ticket_path(t) %>
+        <%end%>
+<%end%>
+ <% else %>
+<h2>MyTickets</h2>
+<% @list_items.each_with_index do |t, index|%>
+        <p><%= index+1 %>. <%= t.content %>.<br/> Admin answer: <%=t.answer%><p>
+<%end%>
+        
+<% end %>

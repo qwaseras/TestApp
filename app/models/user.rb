@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :tickets
     before_save { self.email = email.downcase }
     validates :name,  presence: true, length: { maximum: 20 }
     VALID_EMAIL_REGEX = /\A[^@\s]+@[^@\s]+\z/
@@ -13,6 +14,10 @@ class User < ApplicationRecord
 
     def User.encrypt(token)
         Digest::SHA1.hexdigest(token.to_s)
+    end
+
+    def ticket_list
+        Ticket.where("user_id = ?", id)
     end
 
     private
