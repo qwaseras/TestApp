@@ -17,7 +17,11 @@ class User < ApplicationRecord
     end
 
     def ticket_list
-        Ticket.where("user_id = ?", id)
+        if admin
+            Ticket.all
+        else
+            Ticket.where("user_id = ?", id)
+        end            
     end
 
     private

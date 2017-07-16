@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_action :signed_in_user
   def new
     @ticket = Ticket.new
   end
@@ -13,10 +14,14 @@ class TicketsController < ApplicationController
   end
 
   def edit
-    @ticket = Ticket.find(ticket_params[:id])
-    #if @ticket.update_attributes(ticket_params[:answer])
-     # redirect_to room_path
-    #end
+    @ticket = Ticket.find(params[:id])  
+  end
+  
+  def update
+    @ticket = Ticket.find(params[:id])
+    if @ticket.update_attributes(ticket_params)
+      redirect_to room_path
+    end
   end
 
   def ticket_params
