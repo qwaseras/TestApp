@@ -8,17 +8,20 @@
                 <li>
                     <%= link_to @current_user.name ,   room_path %>
                      <% if current_user.admin? %>
-                    | ADMIN
+                     <h6 style = "color: white;">ADMIN</h6>
                      <% end %>
                 </li>
-                <li><%= link_to "Change Password",    '#' %></li>
-                <li><%= link_to "Sign Out", signout_path,  method: "delete" %></li>
+                
                 <% if !current_user.admin?%>
-                    <li><%= link_to "Send ticket", new_ticket_path %></li>  \
-                <%end%>        
+                    <li><%= link_to "Send ticket", new_ticket_path %></li>  
+                <%end%>
+
+                <li><%= link_to "Change Password",  change_password_path(current_user.id) %></li>
+                <li><%= link_to "Sign Out", signout_path,  method: "delete" %></li>    
+
             <% else %>
                 <li><%= link_to "Sign in", signin_path %></li>                
-            <% end %>    
+            <% end %>   
             </ul>
           </nav>
         </div>

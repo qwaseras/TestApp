@@ -21,11 +21,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+  
+  def update
+    @user =current_user
+    if @user.update_attributes(user_params)
+      flash[:success] = "You changed your password succesfully"      
+      redirect_to room_path
+    end
+  end
+
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
     if user
       user.email_activate
-      flash[:success] = "Your account"
+      flash[:success] = "Your account activated"
       redirect_to room_path
     else
       flash[:success] = "User doe not exist"

@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       #if user.email_confirmed
         sign_in user
-        redirect_to user
+        redirect_to room_path
       #else
        # flash[:error] = 'Activate your account'
       #end

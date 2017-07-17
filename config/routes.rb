@@ -10,10 +10,10 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
   
-  match '/room',    to: 'users#show',       via: 'get'
-  match '/signup',  to: 'users#new',        via: 'get'  
-  match '/signin',  to: 'sessions#new',     via: 'get'
-  match '/signout', to: 'sessions#destroy', via: 'delete'
-  #match '/change_password',   to: 'app#change',  via: 'get'
+  match '/room',              to: 'users#show',       via: 'get'
+  match '/signup',            to: 'users#new',        via: 'get'  
+  match '/signin',            to: 'sessions#new',     via: 'get'
+  match '/signout',           to: 'sessions#destroy', via: 'delete'
+  match '/change_password',   to: 'users#edit',        via: 'get'
 
 end
