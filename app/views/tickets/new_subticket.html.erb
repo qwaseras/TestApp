@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="span6 offset3">
+<h1>Ticket</h1>
+    <%= form_for(@ticket, url: send_answer_path(@ticket)) do |f| %>
+      <%= f.label :content %><br/><%= @t.id%>
+      <%= f.text_field :content,  placeholder: "Compose a  ticket" %><br/>
+      <%= hidden_field_tag :overticket_id, @t.id%>
+
+      <%= f.submit "Send", class: "btn btn-large btn-primary" %><br/>
+    <% end %>
+  </div>

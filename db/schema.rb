@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716170713) do
+ActiveRecord::Schema.define(version: 20170717105901) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "content"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20170716170713) do
     t.string "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_subticket", default: false
+    t.integer "overticket_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170716170713) do
     t.string "remember_token"
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
+    t.integer "overticket_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def show
     @current_user = current_user
     @list_items = current_user.ticket_list
+    @root_tickets = @list_items.find_all{|x| x.is_subticket == false}
   end
 
    def create

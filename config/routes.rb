@@ -15,5 +15,8 @@ Rails.application.routes.draw do
   match '/signin',            to: 'sessions#new',     via: 'get'
   match '/signout',           to: 'sessions#destroy', via: 'delete'
   match '/change_password',   to: 'users#edit',        via: 'get'
+  match '/answer' ,           to: 'tickets#new_subticket', via: 'get'
+  match '/send_answer' ,      to: 'tickets#create_subticket', via: 'post'
+  
 
 end

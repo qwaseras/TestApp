@@ -4,9 +4,26 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new
   end
 
+  def new_subticket
+    @ticket = Ticket.new  
+    @t = Ticket.find(params[:id]);
+  end
+
   def create
     params_with_id = ticket_params
     params_with_id[:user_id] = current_user.id
+    @ticket = current_user.tickets.build(params_with_id)
+    if @ticket.save
+      redirect_to room_path
+      end
+  end
+
+
+  def create_subticket
+    params_with_id = ticket_params
+    params_with_id[:user_id] = current_user.id
+    params_with_id[:overticket_id] = params[:overticket_id]
+    params_with_id[:is_subticket] = true
     @ticket = current_user.tickets.build(params_with_id)
     if @ticket.save
       redirect_to room_path

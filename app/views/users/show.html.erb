@@ -1,13 +1,36 @@
  <% if current_user.admin? %>
- <h2>Tickets</h2>
- <% @list_items.reverse_each do |t|%>
-            <p><%= t.id %>. username: <b><%= User.find_by_id(t.user_id).name %></b><br/><%= t.content %>.<br/> Admin answer: <%=t.answer%><p>
-            <%= link_to "answer", edit_ticket_path(t) %>
-<%end%>
+    <h2>Tickets</h2>
+    <% @root_tickets.reverse_each do |t|%>
+                <p><%= t.id %>. username: <b><%= @name = User.find_by_id(t.user_id).name %></b><br/><%= t.content %>
+                <%= link_to "answer", edit_ticket_path(t) %>            
+            <div class = "sub">
+                <br/> Admin answer: <%=t.answer%><p>            
+                <% @list_items.each do |subt|%>
+                    <% if subt.is_subticket == true && subt.overticket_id == t.id%>
+                    <%= @name %>: <%= subt.content%>
+                    <%= link_to "answer", edit_ticket_path(subt) %></br>
+                    <%end%>        
+                <%end%>
+            </div>
+    <%end%>
  <% else %>
-<h2>MyTickets</h2>
-<% @list_items.each_with_index do |t, index|%>
-        <p><%= index+1 %>. <%= t.content %>.<br/> Admin answer: <%=t.answer%><p>
-<%end%>
+
+
+    <h2>MyTickets</h2>
+    <% @root_tickets.each_with_index do |t, index|%>
+            <p><%= index+1 %>. <%= t.content %>.<br/> 
+            </p>
+            <div class = "sub">
+                admin answer: <%=t.answer%></br>         
+                <% @list_items.each do |subt|%>
+                    <% if subt.is_subticket == true && subt.overticket_id == t.id%>
+                    me: <%= subt.content%></br>
+                       <%if !subt.answer.blank? %> admin: <%= subt.answer%> <%end%>  </br>           
+                    <%end%>        
+                <%end%>
+               <%= link_to "write", answer_path(id: t.id) %>  
+                </div>
+                
+    <%end%>
         
 <% end %>

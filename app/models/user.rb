@@ -25,6 +25,7 @@ class User < ApplicationRecord
             Ticket.where("user_id = ?", id)
         end            
     end
+    
 
     def email_activate
         self.email_confirmed = true
