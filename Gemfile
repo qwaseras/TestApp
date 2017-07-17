@@ -50,7 +50,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'sqlite3'
-  
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
